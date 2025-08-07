@@ -40,7 +40,11 @@ class Solution {
        
 	} 
       if (k > ll.size()) return -1; 
-    ll.sort(Collections.reverseOrder());
+      System.out.println(ll);
+      Collections.sort(ll);
+      Collections.reverse(ll);
+      System.out.println(ll);
+    //ll.sort(Collections.reverseOrder());
     return ll.get(k-1);
 
 
