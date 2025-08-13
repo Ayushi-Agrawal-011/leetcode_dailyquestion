@@ -35,10 +35,10 @@ class Solution {
         //inme se kisi ek ke paas  ya donio ke paas camera h 
             return 0; //iska mtlb  node covered hu
         }
-        else {
+        else if(left==0 && right==0){
             
             return -1; //need a camera
         }
-
+return -1;
     }
 }
