@@ -5,18 +5,12 @@ class Solution {
         int i=0,j=p.length-1;
         while(i<=j){
             if(p[i]+p[j]<=limit){
-             boat++;
+            
              i++;
-             j--;
+          
             }
-            else if(p[i]<p[j]){
-                boat++;
-                j--;
-            }
-            else{
-                boat++;
-                i++;
-            }
+          j--;
+          boat++;
         }
         return boat;
     }
