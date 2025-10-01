@@ -7,9 +7,7 @@ class Solution {
             return false;
         }
         maxReach=Math.max(maxReach,i+nums[i]);
-        if(maxReach>=n-1){
-            return true;
-        }
+       
       }  
       return true;
     }
