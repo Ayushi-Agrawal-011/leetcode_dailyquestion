@@ -7,13 +7,13 @@ Arrays.fill(dp,-1);
 
 public int fibdp(int  n,int []dp){
 if(n==0 || n==1){
-    dp[n]=n;
-    return dp[n];
+
+    return n;
 }
 if(dp[n]!=-1)
 return dp[n];
 int a=fibdp(n-1,dp);
 int b=fibdp(n-2,dp);
-return a+b;
+return dp[n]=a+b;
 }
 }
