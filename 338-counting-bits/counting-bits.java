@@ -4,17 +4,15 @@ class Solution {
  int [] nums=new int[n+1];
  int []dp=new int[n+1];
  Arrays.fill(dp,-1);
- for(int i=0;i<=n;i++){
-    nums[i]=cb(i,dp);
- }
- return nums;
+dp[0]=0;
+if(n==0)
+return dp;
+dp[1]=1;
+for(int i=2;i<dp.length;i++){
+    dp[i]=(i&1) +dp[i>>1];
+}
+ return dp;
     }
-    public int cb(int n,int []dp){
-        if(n==0)
-return 0;
-if(dp[n]!=-1)
-return dp[n];
-return dp[n]=(n&1)+cb( n>>1,dp);
-    }
+    
 
 }
