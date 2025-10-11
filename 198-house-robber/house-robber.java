@@ -1,6 +1,6 @@
 class Solution {
     public int rob(int[] nums) {
-        int [] dp=new int[nums.length];
+  int [] dp=new int[nums.length];
    dp[0]=nums[0];
    if(nums.length==1)
    return dp[0];
@@ -11,8 +11,5 @@ class Solution {
     dp[i]=Math.max(rob,drob);
    }
       return dp[nums.length-1];
-     
-     
     }
-  
 }
