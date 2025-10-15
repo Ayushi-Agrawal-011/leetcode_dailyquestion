@@ -6,22 +6,22 @@ class Solution {
         dp[i][j] = -1;
     }
 }
-return s(s1,s2,0,0,dp);
+return so(s1,s2,0,0,dp);
     }
-     public int s(String s1, String s2,int i,int j,int [][]dp) {
-        if(i==s1.length() || j==s2.length())
-        return 0;
+     public int so(String s, String t,int i,int j,int [][]dp) {
+        if(i==s.length() || j==t.length()){
+            return 0;
+        }
         if(dp[i][j]!=-1)
         return dp[i][j];
-        int ans=0;
-      if(s1.charAt(i)==s2.charAt(j)) {
-   ans=1+s(s1,s2,i+1,j+1,dp);
-      }
-      else{
-        int f=s(s1,s2,i+1,j,dp);
-          int t=s(s1,s2,i,j+1,dp);
-          ans=Math.max(f,t);
-      }
-      return dp[i][j]=ans;
-    }
+        if(s.charAt(i)==t.charAt(j)){
+            return dp[i][j]=1+so(s,t,i+1,j+1,dp);
+        }
+        else{
+            int a=so(s,t,i,j+1,dp);
+
+            int b=so(s,t,i+1,j,dp);
+            return dp[i][j]=Math.max(a,b);
+        }
+            }
 }
