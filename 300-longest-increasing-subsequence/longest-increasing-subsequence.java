@@ -1,7 +1,7 @@
 class Solution {
     public int lengthOfLIS(int[] arr) {
 
-    	int []dp=new int[arr.length];
+    		int []dp=new int[arr.length];
 		int len=1;
 		dp[0]=arr[0];
 		for(int i=1;i<dp.length;i++) {
