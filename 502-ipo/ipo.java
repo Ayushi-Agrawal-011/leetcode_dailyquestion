@@ -9,24 +9,24 @@ class Solution {
 		return IPO(arr, k, w); 
     }
     public static int IPO(int[][] arr, int k, int w) {
-		Arrays.sort(arr, (a, b) -> a[0] - b[0]);
-		PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> b[1] - a[1]);
-		for (int i = 0; i < arr.length;) {
-			while (i<arr.length && w >= arr[i][0]) {
-				pq.add(arr[i]);
-				i++;
-			}
-			if(pq.isEmpty()|| k==0) {
-			return w;
-			}
-			w+=pq.poll()[1];
-			k--;
-
-		}
-		while(!pq.isEmpty() && k>0) {
-			w+=pq.poll()[1];
-			k--;
-		}
+        Arrays.sort(arr,(a,b)->(a[0]-b[0]));//minimize capital
+        PriorityQueue<int[]>pq=new PriorityQueue<>((a,b)->(b[1]-a[1]
+        ));
+        for(int i=0;i<arr.length;){
+            while(i<arr.length && w>=arr[i][0]){
+                pq.add(arr[i]);
+                i++;
+            }
+            if(pq.isEmpty() || k==0)
+            return w;
+            w+=pq.poll()[1];
+            k--;
+        }
+        while(!pq.isEmpty()&& k>0){
+             w+=pq.poll()[1];
+            k--;
+        }
+		
 		return w;
 	}
 }
