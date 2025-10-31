@@ -11,17 +11,32 @@
 class Solution {
     public ListNode reverseList(ListNode head) {
         ListNode curr=head;
-        ListNode prev=null;
-        ListNode temp=head;
+  int c=0;
         while(curr!=null){
-            ListNode ahead=curr.next;
-            curr.next=prev;
-          
-            prev=curr;
-            curr=ahead;
+            curr=curr.next;
+       c++;
 
         }
-        return prev;
-        
+        ListNode tp=GetNode(c-1,head);
+        ListNode p=tp;
+        for(int i=c-2;i>=0;i--){
+            ListNode nn=new ListNode();
+		nn.val=GetNode(i,head).val;
+		p.next=nn;
+		
+		p=nn;
+        }
+    
+        return tp;
     }
+    private ListNode GetNode(int k,ListNode head) {
+
+	ListNode temp=head;
+	for(int i=0;i<k;i++) {
+		temp=temp.next;
+	}
+	return temp;
+}
+  
+
 }
