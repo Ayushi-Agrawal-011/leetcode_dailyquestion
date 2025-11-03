@@ -5,28 +5,24 @@ class Solution {
 		for (int[] a : dp) {
 			Arrays.fill(a, -1);
 		}
-        int ans = Coin_Change(coins, amount, 0, dp);
-		  return ans == Integer.MAX_VALUE ? -1 : ans; 
-    }
-    public static int Coin_Change(int[] coin, int amount, int i, int[][] dp) {
-		if (amount == 0) {
-			return 0;
-		}
-		if (i == coin.length) {
-			return Integer.MAX_VALUE ;
-		}
-		if (dp[amount][i] != -1) {
-			return dp[amount][i];
-		}
-		int inc = Integer.MAX_VALUE, exc = Integer.MAX_VALUE;
-		if (amount >= coin[i]) {
-			inc = Coin_Change(coin, amount - coin[i], i, dp);
-            if(inc !=Integer.MAX_VALUE)
-            inc+=1;
-		}
-		exc = Coin_Change(coin, amount, i + 1, dp);
-	
-		return dp[amount][i] =Math.min(inc,exc);
+          int ans = c2(coins, amount, 0, dp);
+     return ans >= 1e9 ? -1 : ans;
 
-	}
+    }
+    public int c2(int[]coins,int amount,int i,int [][]dp){
+        if(amount==0)
+        return 0;
+        if(i==coins.length)
+        return (int)1e9;
+        if(dp[amount][i]!=-1)
+        return dp[amount][i];
+        int pick=(int)1e9,dopick=0;
+        if(amount>=coins[i])
+         pick=1+c2(coins,amount-coins[i],i,dp);
+         dopick=c2(coins,amount,i+1,dp);
+        return dp[amount][i]=Math.min(pick,dopick);
+    }
+
+    
+	
 }
