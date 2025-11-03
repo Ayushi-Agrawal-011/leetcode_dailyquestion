@@ -10,23 +10,25 @@ class Solution {
     }
 
     public static int Min_Ops(String s, String t, int i, int j, int[][] dp) {
-  if(i==s.length()){
+ if(i==s.length()){
     return t.length()-j;
-  }
-   else if(j==t.length()){
+ }
+  if(j==t.length()){
     return s.length()-i;
-   }
-   if(dp[i][j]!=-1)
-   return dp[i][j];
-   if(s.charAt(i)==t.charAt(j)){
-    return  dp[i][j]=Min_Ops(s,t,i+1,j+1,dp);
-   }
-   else{
-int D=Min_Ops(s,t,i+1,j,dp);
-int I=Min_Ops(s,t,i,j+1,dp);
-int R=Min_Ops(s,t,i+1,j+1,dp);
- return  dp[i][j]=Math.min(D,Math.min(I,R))+1;
-   }
+ }
+ if(dp[i][j]!=-1)
+ return dp[i][j];
+ if(s.charAt(i)==t.charAt(j)){
+    return dp[i][j]=Min_Ops(s,t,i+1,j+1,dp);
+ }
+ else{
+    int I=Min_Ops(s,t,i,j+1,dp);
+    int D=Min_Ops(s,t,i+1,j,dp);
+    int R=Min_Ops(s,t,i+1,j+1,dp);
+      return dp[i][j] = Math.min(D, Math.min(R, I)) + 1;
+
+ }
+   
  
 
 
