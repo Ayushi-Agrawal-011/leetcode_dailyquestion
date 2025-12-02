@@ -13,32 +13,29 @@
  *     }
  * }
  */
+ 
 class Solution {
     int camera=0;
     public int minCameraCover(TreeNode root) {
-      int c=  minCamera(root);
+      int c=minCamera(root);
       if(c==-1)
       camera++;
       return camera;
     }
     public int minCamera(TreeNode root) {
-        if(root==null)
+       if(root==null)
+       return 0;
+       int left=minCamera(root.left);
+       int right=minCamera(root.right);
+       if(left ==-1 || right==-1){
+        camera++;
+        return 1;
+       } 
+       if(left==1 || right==1){
         return 0;
-       
-        int left=minCamera(root.left);
-        int right=minCamera(root.right);
-        if(left==-1 || right==-1){ //is node pr camera ki need h
-            camera++;
-            return 1; //camera setup kiya h is node pr
-        }
-      else   if(left==1 || right==1){ 
-        //inme se kisi ek ke paas  ya donio ke paas camera h 
-            return 0; //iska mtlb  node covered hu
-        }
-        else if(left==0 && right==0){
-            
-            return -1; //need a camera
-        }
-return -1;
+       }
+       if(left ==0 && right==0)
+       return -1;
+       return -1;
     }
 }
