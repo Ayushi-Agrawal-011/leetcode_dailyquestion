@@ -7,28 +7,30 @@ class Solution {
     Arrays.fill(ar,-66666);
   }
   for(int i=0;i<grid[0].length;i++){
-    ans=Math.min(ans,fn(grid,dp,n,n,0,i));
+    ans=Math.min(ans,fn(grid,0,i,n,n,dp));
   }
 return ans;
     }
- 
-  public int fn(int [][]grid,int [][] dp,int n,int m,int i,int j){
-       if(i<0 ||j<0 || i>=n || j>=m)
-       return   Integer.MAX_VALUE;
-    if (i == n - 1)
-            return grid[i][j];
-       if(dp[i][j]!=-66666)
-       return dp[i][j];
-int ans=Integer.MAX_VALUE;
-      for(int p=0;p<m;p++ ){
-        if(p==j){
-            continue;
-        }
-        ans=Math.min(ans,fn(grid,dp,n,m,i+1,p));
-      }
-      
-           return dp[i][j]=ans+grid[i][j];
 
-      
+ public int fn(int[][]grid,int i,int j,int m,int n,int [][] dp){
+        if(i<0 || j<0 || i>=m || j>=n){
+            return Integer.MAX_VALUE;
+        }
+        if(i==m-1){
+            return grid[i][j];
+        }
+        if(dp[i][j]!=-66666)
+        return dp[i][j];
+        int ans=Integer.MAX_VALUE;
+        for(int k=0;k<n;k++){
+            if(k==j)
+            continue;
+             int ld=fn(grid,i+1,k,m,n,dp);
+   ans=Math.min(ans,ld);
+         
+       
+        }
+
+return dp[i][j]=ans+grid[i][j];
     }
 }
