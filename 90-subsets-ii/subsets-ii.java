@@ -8,15 +8,12 @@ class Solution {
     }
     	public static void Combination(int[] nums,List<Integer> cur, int idx, List<List<Integer>> res){
 	//System.out.println(res);
-  
-        res.add(new ArrayList<>(cur));
+   res.add(new ArrayList<>(cur));
     for(int i=idx;i<nums.length;i++){
-        if(i>idx && nums[i]==nums[i-1]){
-            continue;
-        }
+        if(i>idx && nums[i]==nums[i-1])
+        continue;
     cur.add(nums[i]);
     Combination(nums,cur,i+1,res);
         cur.remove(cur.size()-1);
-        
 		}}
 }
