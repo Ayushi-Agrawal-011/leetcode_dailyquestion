@@ -2,7 +2,7 @@ class Solution {
     public String makeLargestSpecial(String s) {
         int count=0;
         int i=0;
-        List<String> res=new LinkedList<>();
+        List<String> res=new ArrayList<>();
        for(int j=0;j<s.length();j++){
         char ch=s.charAt(j);
         if(ch=='1')
