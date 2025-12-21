@@ -13,7 +13,7 @@ class Solution {
 
 	 public void fn(int []coins,int target,int idx,List<List<Integer>> res, List<Integer> ll){
          if(target==0 ){
-            if(!res.contains(ll))
+          
             res.add(new ArrayList<>(ll));
             return;
         }
