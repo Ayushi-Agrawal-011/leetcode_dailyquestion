@@ -4,28 +4,30 @@ class Solution {
         Arrays.sort(coin);
    List<List<Integer>> res=new ArrayList<>();
        List <Integer> cur=new ArrayList<>();
-       Combination(coin,cur,0,res,target);
+      fn(coin,target,0,res,cur);
        return res;  
 	
 	}
-public static void Combination(int[] nums,List<Integer> cur, int idx, List<List<Integer>> res,int target){
-	//System.out.println(res);
-    if(target==0){
-        res.add(new ArrayList<>(cur));
-        return;
-    }
-  
+
        
-    for(int i=idx;i<nums.length;i++){
-        if(i>idx && nums[i]==nums[i-1]){
+
+	 public void fn(int []coins,int target,int idx,List<List<Integer>> res, List<Integer> ll){
+         if(target==0 ){
+            if(!res.contains(ll))
+            res.add(new ArrayList<>(ll));
+            return;
+        }
+     
+        for(int i=idx;i<coins.length;i++){
+               if(i>idx && coins[i]==coins[i-1]){
             continue;
         }
-        if(target>=nums[i]){
-    cur.add(nums[i]);
-    Combination(nums,cur,i+1,res,target-nums[i]);
-        cur.remove(cur.size()-1);
-        }
-		}}
-	
+            if(target>=coins[i]){
+            ll.add(coins[i]);
+            fn(coins,target-coins[i],i+1,res,ll);
+            ll.remove(ll.size()-1);
+            }
+        
+    }}
 	
 }
