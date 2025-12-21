@@ -1,31 +1,34 @@
 public class Solution {
     public List<List<String>> partition(String s) {
-        List<List<String>> result = new ArrayList<>();
-        backtrack(s, 0, new ArrayList<>(), result);
-        return result;
+    List<List<String>> res=new ArrayList<>();
+    List<String> cur=new ArrayList<>();
+    part(s,res,cur);
+    return res;
     }
-
-    private void backtrack(String s, int start, List<String> path, List<List<String>> result) {
-        if (start == s.length()) {
-            result.add(new ArrayList<>(path));
-            return;
-        }
-        for (int end = start + 1; end <= s.length(); end++) {
-            if (isPalindrome(s, start, end - 1)) {
-                path.add(s.substring(start, end));
-                backtrack(s, end, path, result);
-
-                path.remove(path.size() - 1);
-            }
-        }
+public void part(String s,    List<List<String>> res,List<String> cur){
+   if(s.length()==0){
+    res.add(new ArrayList<>(cur));
+    return;
+   }
+   for(int i=1;i<=s.length();i++){
+    String p=s.substring(0,i);
+    if(ispal(p)){
+        cur.add(p);
+        part(s.substring(i),res,cur);
+        cur.remove(cur.size()-1);
     }
+   }
+}
+public boolean ispal(String s){
+    int i=0,j=s.length()-1;
+    while(i<j){
+        if(s.charAt(i)!=s.charAt(j))
+        return false;
 
-    private boolean isPalindrome(String s, int left, int right) {
-        while (left < right) {
-            if (s.charAt(left++) != s.charAt(right--)) {
-                return false;
-            }
-        }
-        return true;
+        i++;
+        j--;
     }
+    return true;
+}
+
 }
