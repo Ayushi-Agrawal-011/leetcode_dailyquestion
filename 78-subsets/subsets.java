@@ -8,7 +8,6 @@ class Solution {
     }
     
 	public static void Combination(int[] nums,List<Integer> cur, int idx, List<List<Integer>> res){
-	
         res.add(new ArrayList<>(cur));
     for(int i=idx;i<nums.length;i++){
     cur.add(nums[i]);
