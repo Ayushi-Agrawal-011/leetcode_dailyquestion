@@ -1,63 +1,62 @@
 class Solution {
    static  List<List<String>> ans;
     public List<List<String>> solveNQueens(int n) {
-        String [][] arr=new String[n][n];
+         List<List<String>> p=new ArrayList<>();
+       char [][] arr=new char[n][n];
     ans=new ArrayList<>();
-   for(String []ar:arr){
-    Arrays.fill(ar,".");
+   for(char []ar:arr){
+    Arrays.fill(ar,'.');
    }
-    fn(arr,0,n);  
-    return ans;   
+    fn(arr,0,n,n,p,new ArrayList<>());  
+    return p;   
     }
-    public void fn(String[][]board,int cr,int n){
-        if(cr==n){
-            List<String> ll=new ArrayList<>();
-        for(int i=0;i<n;i++){
-            StringBuilder sb=new StringBuilder();
-            for(int j=0;j<n;j++){
-                sb.append(board[i][j]);
+public static  void fn(char[][]board,int row,int n,int tq,List<List<String>> p,List<String> ll){
+        if(tq==0){
+           p.add(con(board));
+            return;
+        }
+        for(int col=0;col<n;col++){
+            if(isitsafe(board,row,col)){
+                board[row][col]='Q';
+                fn(board,row+1,n,tq-1,p,ll);
+                board[row][col]='.';
+
             }
-            ll.add(sb.toString());
-
         }
-        ans.add(ll);
-         return ;
-        }
-        for(int cc=0;cc<n;cc++){
-           if(isitsafe(board,cr,cc)){
-            board[cr][cc]="Q";
-            fn(board,cr+1,n);
-            board[cr][cc]=".";
-           }
-        }
-
+    }
+    public static boolean isitsafe(char[][]board,int row,int col){
+          int i=row;
+          int j=col;
+          while(i>=0){
+            if(board[i][j]=='Q')
+            return false;
+            i--;
+          }
+          i=row;
+          j=col;
+          while(i>=0 && j>=0){
+            if(board[i][j]=='Q')
+            return false;
+            i--;
+            j--;
+          }
+            i=row;
+          j=col;
+          while(i>=0 && j<board[0].length){
+            if(board[i][j]=='Q')
+            return false;
+            i--;
+            j++;
+          }
+          return true;
 
     }
-    public boolean isitsafe(String [][]board,int cr,int cc){
-        //upr
-        for(int i=cr;i>=0;i--){
-            if(board[i][cc].equals("Q"))
-            return false;
+     public static List<String> con(char [][]board){
+        List<String> w=new ArrayList<>();
+         for (int i=0;i<board.length;i++) {
+            w.add(new String(board[i]));
         }
-        //left diagonal
-        int row=cr;
-        int col=cc;
-       while(row>=0 && col>=0){
-        if(board[row][col].equals("Q")){
-            return false;
-        }
-        row--;
-        col--;
-       }
-       row=cr;
-       col=cc;
-       while(row>=0 && col<board.length){
-        if(board[row][col].equals("Q")){
-            return false;
-        }
-        row--;
-        col++;
-       }
-       return true;
+        return w;
     }
+   
 }
