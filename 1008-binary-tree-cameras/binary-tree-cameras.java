@@ -23,19 +23,21 @@ class Solution {
       return camera;
     }
     public int minCamera(TreeNode root) {
-       if(root==null)
+    if(root==null)
        return 0;
-       int left=minCamera(root.left);
-       int right=minCamera(root.right);
-       if(left ==-1 || right==-1){
-        camera++;
-        return 1;
-       } 
-       if(left==1 || right==1){
-        return 0;
-       }
-       if(left ==0 && right==0)
-       return -1;
-       return -1;
+int left=minCamera(root.left);
+int right=minCamera(root.right);
+
+
+if(left==-1 || right==-1){
+   camera++;
+    return 1;
+}
+else if(left==1 || right==1)
+return 0;
+else if(left==0  && right==0){
+ return -1;
+}
+return -1;
     }
 }
