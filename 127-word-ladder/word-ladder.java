@@ -1,40 +1,38 @@
 class Solution {
     public int ladderLength(String beginWord, String endWord, List<String> wordList) {
-Queue<Pair> q=new LinkedList<>();
-q.add(new Pair(beginWord,1));
-Set<String> visited=new HashSet<>(wordList);
-
-  visited.remove(beginWord)  ;
-  while(!q.isEmpty()){
-    Pair rp=q.poll();
-    char[]word=rp.cur.toCharArray();
-    if(rp.cur.equals(endWord))
-    return rp.step;
-    for(int i=0;i<word.length;i++){
-        char ch=word[i];
-        for(char p='a';p<='z';p++){
-            if(p==ch)
-            continue;
-            word[i]=p;
-            String changed=new String(word);
-            if(visited.contains(changed)){
-                q.add(new Pair(changed,rp.step+1));
-                visited.remove(changed);
+        Queue<Pair> q=new LinkedList<>();
+        HashSet<String>visited=new HashSet<>(wordList);
+        if(visited.contains(beginWord))
+        visited.remove(beginWord);
+        q.add(new Pair(beginWord,1));
+        while(!q.isEmpty()){
+            Pair rp=q.poll();
+            char[]word=rp.cur.toCharArray();
+            if((rp.cur).equals(endWord))
+            return rp.steps;
+            for(int i=0;i<word.length;i++){
+                char p=word[i];
+                for(char ch='a';ch<='z';ch++){
+                    if(p==ch)
+                    continue;
+                    word[i]=ch;
+                    String changed=new String(word);
+                    if(visited.contains(changed)){
+                        q.add(new Pair(changed,rp.steps+1));
+                        visited.remove(changed);
+                    }
+                    word[i]=p;
+                }
             }
         }
-        word[i]=ch;
+        return 0;
     }
-
-  }
-  return 0;
-}
+    class Pair{
+        String cur;
+        int steps;
+        public Pair(String cur,int steps){
+            this.cur=cur;
+            this.steps=steps;
+        }
     }
-   class Pair{
-    String cur;
-    int step;
-    public Pair(String cur,int step){
-        this.cur=cur;
-        this.step=step;
-    }
-   
 }
