@@ -24,11 +24,11 @@ public boolean ispal(String s){
     while(i<j){
         if(s.charAt(i)!=s.charAt(j))
         return false;
-
         i++;
         j--;
     }
     return true;
 }
+
 
 }
