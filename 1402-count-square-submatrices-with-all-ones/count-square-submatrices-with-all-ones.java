@@ -8,22 +8,23 @@ class Solution {
         }
         int c=0;
         for(int i=0;i<n;i++){
-          for(int j=0;j<m;j++){
-           c+=fn(matrix,dp,i,j);
-          }
+            for(int j=0;j<m;j++){
+                c+=fn(matrix,dp,i,j);
+            }
         }
         return c;
+       
     }
     public int fn(int[][]matrix,int[][]dp,int i,int j){
-        if(i>=matrix.length || j>=matrix[0].length)
-        return 0;
-        if(matrix[i][j]==0)
-        return 0;
-        if(dp[i][j]!=-1)
-        return dp[i][j];
-        int right=fn(matrix,dp,i,j+1);
-        int diagonal=fn(matrix,dp,i+1,j+1);
-        int bottom=fn(matrix,dp,i+1,j);
-        return dp[i][j]=1+Math.min(diagonal,Math.min(right,bottom));
+      if(i>=matrix.length || j>=matrix[0].length)
+      return 0;
+      if(matrix[i][j]==0)
+      return 0;
+      if(dp[i][j]!=-1)
+      return dp[i][j];
+      int right=fn(matrix,dp,i,j+1);
+      int bottom=fn(matrix,dp,i+1,j);
+      int diagonal=fn(matrix,dp,i+1,j+1);
+      return dp[i][j]=Math.min(right,Math.min(bottom,diagonal))+1;
     }
 }
