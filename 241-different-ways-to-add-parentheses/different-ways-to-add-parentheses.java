@@ -27,7 +27,7 @@ for(int x:left){
         }
         if(ans.isEmpty())
         ans.add(Integer.parseInt(s));
-        mp.put(s,ans);
+      //  mp.put(s,ans);
         return  ans;
      
 
