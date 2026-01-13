@@ -1,19 +1,32 @@
 class Solution {
     public int strStr(String haystack, String needle) {
-         if (haystack.length() < needle.length()) {
-            return -1;
+        if(haystack.length()<needle.length())
+        return -1;
+      int idx=-1;
+      int i=0;
+      int j=0;
+      while(i<haystack.length() && j<needle.length()){
+if(haystack.charAt(i)==needle.charAt(j)){
+    if(j==0)
+    idx=i;
+    j++;
+     if( j==needle.length())
+return idx;
+i++;
+    
+}
+else {
+    if (j > 0) {               
+          i = idx+1;   
         }
+        else
+        i++;
+                j = 0;
+                idx = -1;
+    
+}
 
-        for (int i = 0; i <= haystack.length() - needle.length(); i++) {
-            int j = 0;
-            while (j < needle.length() && haystack.charAt(i + j) == needle.charAt(j)) {
-                j++;
-            }
-            if (j == needle.length()) {
-                return i; // found match starting at i
-            }
-        }
-
-        return -1; // no matc
+      } 
+    return -1; 
     }
 }
