@@ -1,41 +1,42 @@
 class Solution {
     public int primeSubarray(int[] nums, int k) {
-        int n=nums.length;
-boolean[] isprime=new boolean[nums.length];
-for(int i=0;i<n;i++){
-    isprime[i]=fn(nums[i]);
-}
-int ei=0,si=0;
-int prime=-1,lastprime=-1;
-TreeMap<Integer,Integer> map=new TreeMap<>();
-int c=0;
-long ans=0;
-while(ei<n){
-    if(isprime[ei]){
-        c++;
-map.put(nums[ei],map.getOrDefault(nums[ei],0)+1);
-lastprime=prime;
-prime=ei;
+    int n=nums.length;
+    boolean[]isprime=new boolean[n];
+    for(int i=0;i<n;i++){
+        isprime[i]=fn(nums[i]);
     }
-    while(!map.isEmpty() && map.lastKey()-map.firstKey()>k){
-        if(isprime[si]){
+    int lastp=-1;
+    int secondlastp=-1;
+    TreeMap<Integer,Integer> map=new TreeMap<>();
+    int si=0,ei=0;
+    int ans=0,c=0;
+    while(ei<n){
+        if(isprime[ei]){
+         c++;
+         secondlastp=lastp;
+         lastp=ei;
+         map.put(nums[ei],map.getOrDefault(nums[ei],0)+1);
+
+        }
+        while(!map.isEmpty() && map.lastKey()-map.firstKey()>k){
+            if(isprime[si]){
             c--;
             map.put(nums[si],map.getOrDefault(nums[si],0)-1);
             if(map.get(nums[si])==0)
             map.remove(nums[si]);
+            }
+            si++;
         }
-        si++;
+        if(c>=2)
+        ans+=(secondlastp-si+1);
+
+        ei++;
     }
-    if(c>=2){
-            ans+=(lastprime - si + 1);
-        }
-     ei++;
-}
-return (int)ans;
+    return ans;
     }
+
 public boolean fn(int n){
-     if (n <= 1) return false;
-    if(n==1)
+    if(n<=1)
     return false;
     if(n==2)
     return true;
@@ -46,5 +47,5 @@ public boolean fn(int n){
         return false;
     }
     return true;
-}
-}
+}}
+
