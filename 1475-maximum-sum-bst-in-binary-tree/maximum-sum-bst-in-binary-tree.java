@@ -13,33 +13,34 @@
  *     }
  * }
  */
- class BSTPair{
-long maxi=Long.MIN_VALUE;
-
-long mini=Long.MAX_VALUE;
-boolean isbal=true;
-int sum=0;
-int ans=0;
- }
 class Solution {
     public int maxSumBST(TreeNode root) {
-        return helper(root).ans;
+       return fn(root).ans;
     }
-     public BSTPair helper(TreeNode root) {
-     if(root==null)
-     return new BSTPair();
-     BSTPair ldp=helper(root.left);
-     BSTPair rdp=helper(root.right);
-     BSTPair sdp=new BSTPair();
-     sdp.maxi=Math.max(ldp.maxi,Math.max(rdp.maxi,root.val));
-     sdp.mini=Math.min(ldp.mini,Math.min(rdp.mini,root.val));
-     sdp.isbal=ldp.isbal && rdp.isbal && ldp.maxi<root.val && rdp.mini>root.val;
-      sdp.sum=ldp.sum+rdp.sum+root.val;
-      if(sdp.isbal)
-      sdp.ans=Math.max(ldp.ans,Math.max(rdp.ans,sdp.sum));
-      else
-      sdp.ans=Math.max(ldp.ans,rdp.ans);
+    public DiaPair fn(TreeNode root){
+ if(root==null)
+        return new DiaPair();
+        DiaPair ldp=fn(root.left);
+        DiaPair rdp=fn(root.right);
+        DiaPair sdp=new DiaPair();
+        sdp.min=Math.min(ldp.min,Math.min(rdp.min,root.val));
+        sdp.max=Math.max(ldp.max,Math.max(rdp.max,root.val));
+        sdp.sum=ldp.sum+rdp.sum+root.val;
+        sdp.isbst=ldp.isbst && rdp.isbst && ldp.max<root.val && root.val<rdp.min;
+        if(sdp.isbst){
+            sdp.ans=Math.max(ldp.ans,Math.max(rdp.ans,sdp.sum));
 
-     return sdp;
-}
+        }
+        else
+        sdp.ans=Math.max(ldp.ans,rdp.ans);
+        return sdp;
+        
+    }
+    class DiaPair{
+        boolean isbst=true;
+        int min=Integer.MAX_VALUE;
+        int max=Integer.MIN_VALUE;
+        int sum=0;
+        int ans=0;
+    }
 }
