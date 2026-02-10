@@ -13,31 +13,29 @@
  *     }
  * }
  */
- 
 class Solution {
-    int camera=0;
+    int c=0;
     public int minCameraCover(TreeNode root) {
-      int c=minCamera(root);
-      if(c==-1)
-      camera++;
-      return camera;
+        int ans=fn(root);
+        if(ans==-1)
+        c++;
+        return c;
     }
-    public int minCamera(TreeNode root) {
-    if(root==null)
-       return 0;
-int left=minCamera(root.left);
-int right=minCamera(root.right);
+    public int fn(TreeNode root){
+        if(root==null)
+        return 0;
+        int left=fn(root.left);
+        int right=fn(root.right);
+        if(left==-1 || right==-1){
+            c++;
+            return 1;
+        }
+       else if(left==1 || right==1 )
+        return 0;
+       else if(left==0 && right==0)
+        return -1;
+        return -1;
 
 
-if(left==-1 || right==-1){
-   camera++;
-    return 1;
-}
-else if(left==1 || right==1)
-return 0;
-else if(left==0  && right==0){
- return -1;
-}
-return -1;
     }
 }
