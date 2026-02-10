@@ -14,19 +14,19 @@
  * }
  */
 class Solution {
-   long ans=0,total=0;
+   // int total=0,ans=0;
+    long ans=0,total=0;
     public int maxProduct(TreeNode root) {
-        total=s(root);
-        s(root);
-       return (int) (ans % (1e9+7));
-        
+      total=s(root);
+      s(root);
+      return (int) (ans % (1e9+7)); 
+  
     }
     public int s(TreeNode root){
         if(root==null)
         return 0;
-        int curr=s(root.left)+s(root.right)+root.val;
+        int  curr=s(root.left)+s(root.right)+root.val;
         ans=Math.max(ans,(total-curr)*curr);
         return curr;
     }
-
 }
