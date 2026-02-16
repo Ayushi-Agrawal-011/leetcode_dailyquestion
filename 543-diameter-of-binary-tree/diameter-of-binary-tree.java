@@ -13,28 +13,24 @@
  *     }
  * }
  */
- class DiaPair{
-    int ht=-1;
-    int dt=0;
-
-}
-
 class Solution {
-		public int diameterOfBinaryTree(TreeNode root) {
-			return diameter(root).dt;
-		}
-
-		public DiaPair diameter(TreeNode root) {
-		if(root==null){
-        return new DiaPair();}
-        DiaPair ldp=diameter(root.left);
-        DiaPair rdp=diameter(root.right);
-        DiaPair sdp=new DiaPair();
-        sdp.ht=Math.max(ldp.ht,rdp.ht)+1;
-        int sd=ldp.ht+rdp.ht+2;
-        sdp.dt=Math.max(sd,Math.max(ldp.dt,rdp.dt));
-        return sdp;
-        
-			
-		}
-	}
+    public int diameterOfBinaryTree(TreeNode root) {
+        return fn(root).dt;
+    }
+    public DiaPair fn(TreeNode root){
+          if(root==null)
+          return new DiaPair();
+          DiaPair ldp=fn(root.left);
+          DiaPair rdp=fn(root.right);
+          DiaPair sdp=new DiaPair();
+          sdp.ht=Math.max(ldp.ht,rdp.ht)+1;
+              int sb=ldp.ht+rdp.ht+2;
+              sdp.dt=Math.max(ldp.dt,Math.max(rdp.dt,sb));
+              return sdp;
+    }
+    class DiaPair{
+        int ht=-1;
+        int dt=0;
+    }
+    
+}
