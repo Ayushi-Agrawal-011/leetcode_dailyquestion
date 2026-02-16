@@ -14,40 +14,34 @@
  * }
  */
 class Solution {
-    public List<Double> averageOfLevels(TreeNode root) { List<List<Integer>> ll=new ArrayList<>();
-        Queue<TreeNode> q=new LinkedList<>();//use linked list as queue
-	q.add(root);//addLast
-    List<Double> res=new ArrayList<>();
-	while(!q.isEmpty()) {
-		
-         int size = q.size();
-            double sum = 0;
-
-            for (int i = 0; i < size; i++) {
-  TreeNode n = q.poll();
-                sum += n.val;
-	
-		if(n.left!=null) {
-            
-			q.add(n.left);
-		}
-		if(n.right!=null) {
-            
-			q.add(n.right);
-		}
-       
+    public List<Double> averageOfLevels(TreeNode root) {
+       if(root==null)
+       return new ArrayList <>();
+        List<Double> ans=new ArrayList<>();
+List<List<Integer>> res=new ArrayList<>();
+    Queue<TreeNode> q=new LinkedList<>();
+    q.add(root);
+    while(!q.isEmpty()){
+        int s=q.size();
+        List<Integer> ll=new ArrayList<>();
+        for(int i=0;i<s;i++){
+            TreeNode r=q.poll();
+            ll.add(r.val);
+            if(r.left!=null)
+            q.add(r.left);
+            if(r.right!=null)
+            q.add(r.right);
         }
-      res.add((double)sum/size);
-	
-
- 
-   
-     
+        res.add(ll);
+    } 
+    for(List<Integer> ll:res){
+        long sum=0;
+        for(int y:ll){
+            sum+=y;
+        }
+        double a=(double)sum/ll.size();
+        ans.add(a);
     }
-    return res;
-        
+    return ans;
     }
-    public void LevelOrder() {
-	
-}
 }
