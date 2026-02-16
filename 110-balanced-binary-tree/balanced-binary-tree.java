@@ -13,29 +13,23 @@
  *     }
  * }
  */
- class DiaPair{
- boolean isbal=true;
-    int ht=-1;
-
-}
-
 class Solution {
     public boolean isBalanced(TreeNode root) {
-        return diameter(root).isbal;
+       return fn(root).isbal; 
     }
-    
-	public DiaPair diameter(TreeNode root) {
-		if(root==null){
-    return new DiaPair();}
-    DiaPair ldp=diameter(root.left);
-    DiaPair rdp=diameter(root.right);
-    DiaPair sdp=new DiaPair();
-    sdp.ht=Math.max(ldp.ht,rdp.ht)+1;
-    boolean sd=Math.abs(ldp.ht-rdp.ht)<=1;
-    sdp.isbal=ldp.isbal && rdp.isbal && sd;
-return sdp;
-		
-	}
-	
-
+    public DiaPair fn(TreeNode root){
+        if(root==null)
+        return new DiaPair();
+        DiaPair ldp=fn(root.left);
+        DiaPair rdp=fn(root.right);
+        DiaPair sdp=new DiaPair();
+        sdp.ht=Math.max(ldp.ht,rdp.ht)+1;
+        boolean sb=Math.abs(ldp.ht-rdp.ht)<=1;
+        sdp.isbal=ldp.isbal && rdp.isbal && sb;
+        return sdp;
+    }
+    class DiaPair{
+        int ht=-1;
+        boolean isbal=true;
+    }
 }
