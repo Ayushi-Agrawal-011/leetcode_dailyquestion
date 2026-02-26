@@ -1,26 +1,16 @@
 class Solution {
-    public int edgeScore(int[] nums) {
-    
-         TreeMap<Integer, Long> mp = new TreeMap<>(Collections.reverseOrder());
-        
-    
-        for(int i=0;i<nums.length;i++){
-               int num = nums[i];
-            mp.put(num, mp.getOrDefault(num, 0L) + i);
+    public int edgeScore(int[] edges) {
+        long[]score=new long[edges.length];
+        for(int i=0;i<edges.length;i++){
+           score[edges[i]]+=i;
         }
- long maxScore = -1;
-        int ans = -1;
-        for (int num : mp.keySet()) {
-            long s = mp.get(num);
-            if (s > maxScore) {
-                maxScore = s;
-                ans = num;
-            } 
-            else if (s == maxScore && num < ans) { 
-                ans = num;
+        long max=Arrays.stream(score).max().getAsLong();
+        
+        for(int i=0;i<score.length;i++){
+            if(score[i]==max){
+                return i;
             }
         }
-
-        return ans;
+        return -1;
     }
 }
