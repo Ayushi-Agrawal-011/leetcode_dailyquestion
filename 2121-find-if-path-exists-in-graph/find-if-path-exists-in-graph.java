@@ -1,40 +1,31 @@
 class Solution {
-
-     private HashMap<Integer, List<Integer>> mp;
-    public boolean validPath(int n, int[][] edges, int src, int des) {
-         Solution ts=new Solution(n);
-          
-for(int i=0;i<edges.length;i++){
-ts.AddEdge(edges[i][0],edges[i][1]);
-}
-return ts.HasPath(src,des,new HashSet<>());
+    private HashMap<Integer,List<Integer>> map;
+    public boolean validPath(int n, int[][] edges, int source, int destination) {
+        map=new HashMap<>();
+        for(int i=0;i<n;i++){
+            map.put(i,new ArrayList<>());
+        }
+        for(int i=0;i<edges.length;i++){
+            int a=edges[i][0];
+            int b=edges[i][1];
+            map.get(a).add(b);
+            map.get(b).add(a);
+        }
+        Queue<Integer> q=new LinkedList<>();
+        HashSet<Integer> visited=new HashSet<>();
+        q.add(source);
+        while(!q.isEmpty()){
+            int r=q.poll();
+            if(visited.contains(r))
+            continue;
+            if(r==destination)
+            return true;
+            visited.add(r);
+            for(int nbrs:map.get(r)){
+                if(!visited.contains(nbrs))
+                q.add(nbrs);
+            }
+        }
+        return false;
     }
-     public Solution() {}
-     public Solution(int v){
-	        mp=new HashMap<>();
-	        for (int i=0;i<v;i++){
-	            mp.put(i,new ArrayList<>());
-	        }
-
-	    }
-	   
-	    public void AddEdge(int v1,int v2){
-	        mp.get(v1).add(v2);
-            mp.get(v2).add(v1);
-
-	    }
-	  public boolean HasPath(int src,int des,HashSet<Integer> visited) {
-	if(src==des) {
-		return true;
-	}
-	visited.add(src);
-	for(int x:mp.get(src)) {
-		if(!visited.contains(x)) {
-			boolean ans=HasPath(x,des,visited);
-			if(ans)
-				return ans;
-		}
-	}
-	return false;
-}
 }
