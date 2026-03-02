@@ -10,10 +10,10 @@ class Solution {
            map.get(i+1).put(i,1);
      }
      int[]ans=new int[n];
-    if (x != y) {
+    // if (x != y) {
     map.get(x).put(y,1);
     map.get(y).put(x,1);
-}
+//}
   
         for(int i=1;i<=n;i++){
 int[]dist=dijkstra(n,i);
