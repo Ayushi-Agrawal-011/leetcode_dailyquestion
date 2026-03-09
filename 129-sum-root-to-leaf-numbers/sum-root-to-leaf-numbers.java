@@ -15,19 +15,18 @@
  */
 class Solution {
     public int sumNumbers(TreeNode root) {
-return  hasPathSum(root,0);
-        
+        return fn(root,0);
     }
-    public static int hasPathSum(TreeNode root,int sum1){
-      if(root==null){
+    public int fn(TreeNode root,int sum){
+        if(root==null)
         return 0;
-    }
-    if(root.left==null && root.right==null){
-        return sum1*10+root.val;
-    }
-   
-  int left= hasPathSum(root.left,root.val+sum1*10);
-     int right= hasPathSum(root.right,root.val+sum1*10);
-     return left+ right;
+    
+        if(root.left==null && root.right==null){
+            return sum*10+root.val;
+        }
+        int left=fn(root.left,sum*10+root.val);
+
+        int right=fn(root.right,sum*10+root.val);
+        return left+right;
     }
 }
