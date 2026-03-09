@@ -16,14 +16,14 @@
 class Solution {
     int ans=0;
     public int distributeCoins(TreeNode root) {
-        minmove(root);
+        fn(root);
         return ans;
     }
-    public int minmove(TreeNode root){
+    public int fn(TreeNode root){
         if(root==null)
         return 0;
-        int left=minmove(root.left);
-        int right=minmove(root.right);
+        int left=fn(root.left);
+        int right=fn(root.right);
         ans+=Math.abs(left)+Math.abs(right);
         return root.val+left+right-1;
     }
