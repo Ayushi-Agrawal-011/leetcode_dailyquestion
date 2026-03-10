@@ -1,18 +1,20 @@
 class Solution {
     public String longestPalindrome(String s) {
-    int c=Integer.MIN_VALUE;
-    String p="";
-        for(int i=0;i<s.length();i++){
-            for(int j=i;j<s.length();j++){
-                if(ispal(s.substring(i,j+1))){
-   c=Math.max(c,j-i);
-   if(c==j-i)
-   p=s.substring(i,j+1);
+        int ans=0;
+        String k="";
+        for(int len=1;len<=s.length();len++){
+            for(int j=len;j<=s.length();j++){
+                int i=j-len;
+                if(ispal(s.substring(i,j))){
+                 
+                    if(ans<len){
+                        ans=len;
+                        k=s.substring(i,j);
+                    }
                 }
-             
             }
         }
-        return p;
+        return k;
     }
     public  boolean ispal(String s){
         int i=0,j=s.length()-1;
@@ -24,5 +26,4 @@ class Solution {
         }
         return true;
     }
-	
 }
