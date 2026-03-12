@@ -18,18 +18,15 @@ int maxd=0;
     public int maxDepth(TreeNode root) {
         if(root==null)
         return 0;
-       fn(root,1);
-       return maxd;
+       return fn(root,1);
     }
-    public void fn(TreeNode root,int cl){
+    public int fn(TreeNode root,int cl){
         if(root==null)
-        return ;
-        if(cl>maxd){
-            maxd=cl;
-            //cl++;
-        }
-        fn(root.left,cl+1);
-        fn(root.right,cl+1);
+        return 0 ;
+        
+     int a=   fn(root.left,cl+1);
+     int b=   fn(root.right,cl+1);
+     return Math.max(a,b)+1;
     }
 
 }
