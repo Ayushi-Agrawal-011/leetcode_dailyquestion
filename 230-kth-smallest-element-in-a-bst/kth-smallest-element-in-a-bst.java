@@ -15,9 +15,9 @@
  */
 class Solution {
     public int kthSmallest(TreeNode root, int k) {
-        List<Integer> ll=new ArrayList<>();
         Queue<TreeNode> q=new LinkedList<>();
         q.add(root);
+        List<Integer> ll=new ArrayList<>();
         while(!q.isEmpty()){
             TreeNode r=q.poll();
             ll.add(r.val);
@@ -25,7 +25,8 @@ class Solution {
             q.add(r.left);
             if(r.right!=null)
             q.add(r.right);
-        }  
+
+        }
         Collections.sort(ll);
         return ll.get(k-1);
     }
