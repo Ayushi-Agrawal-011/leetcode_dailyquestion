@@ -1,33 +1,35 @@
 class Solution {
-    public static int largestRectangleArea(int []arr) {
-	int ans=0;
-	Stack <Integer> st=new Stack<>();
-	for(int i=0;i<arr.length;i++){
-        while(!st.isEmpty() && arr[i]<arr[st.peek()]){
-            int h=arr[st.pop()];
-            int r=i;
-            if(st.isEmpty())
-            ans=Math.max(h*r,ans);
-            else{
-                int l=st.peek();
-                int area=h*(r-l-1);
-                ans=Math.max(area,ans);
+    public int largestRectangleArea(int[] arr) {
+        Stack<Integer> st=new Stack<>();
+        int ans=0;
+        for(int i=0;i<arr.length;i++){
+            while(!st.isEmpty() && arr[i]<arr[st.peek()]){
+                int h=arr[st.pop()];
+                int r=i;
+                if(st.isEmpty())
+                ans=Math.max(ans,h*r);
+                else{
+                    int l=st.peek();
+                      ans=Math.max(ans,h*(r-l-1));
+    
+
+                }
             }
+            st.push(i);
         }
-        st.push(i);
+        int r=arr.length;
+        while(!st.isEmpty()){
+              int h=arr[st.pop()];
+               
+                if(st.isEmpty())
+                ans=Math.max(ans,h*r);
+                else{
+                    int l=st.peek();
+                      ans=Math.max(ans,h*(r-l-1));
+    
+
+                }
+        }
+        return ans;
     }
-    int r=arr.length;
-    while(!st.isEmpty()){
-         int h=arr[st.pop()];
-           
-            if(st.isEmpty())
-            ans=Math.max(h*r,ans);
-            else{
-                int l=st.peek();
-                int area=h*(r-l-1);
-                ans=Math.max(area,ans);
-            }
-    }
-    return ans;
-}
 }
