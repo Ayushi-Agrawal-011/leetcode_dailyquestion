@@ -1,44 +1,47 @@
 class Solution {
     public int orangesRotting(int[][] grid) {
-        int rows = grid.length, cols = grid[0].length;
-        int maxTime = 0;
+        int m = grid.length;
+        int n = grid[0].length;
+     PriorityQueue<Pair> pq=new PriorityQueue<>((a,b)->(a.time-b.time));
+     int c=0;
+     for(int i=0;i<grid.length;i++){
+        for(int j=0;j<grid[0].length;j++){
+            if(grid[i][j]==2)
+            pq.add(new Pair(i,j,0));
+           else if(grid[i][j]==1)
+            c++;
+        }
+     }
+     if(c == 0) return 0; 
+     int ans=0;
+     int[][]dir={{-1,0},{1,0},{0,-1},{0,1}};
+     while(!pq.isEmpty()){
+        Pair rp=pq.poll();
         
-        // Step 1: iterate over all cells
-        for(int i = 0; i < rows; i++){
-            for(int j = 0; j < cols; j++){
-                if(grid[i][j] == 1){  // fresh orange
-                    int time = dfs(grid, i, j, new boolean[rows][cols]);
-                    if(time == Integer.MAX_VALUE) return -1; // can't rot
-                    maxTime = Math.max(maxTime, time);
-                }
+        ans=Math.max(ans,rp.time);
+        for(int []d:dir){
+            int nr=d[0]+rp.r;
+            int nc=d[1]+rp.c;
+           if(nr>=0 && nc>=0 && nr<m && nc<n && grid[nr][nc]==1){
+             grid[nr][nc]=2;
+             c--;
+             pq.add(new Pair(nr,nc,rp.time+1));
             }
         }
-        
-        return maxTime;
+     }
+      return c==0 ? ans : -1;
+   
+   
     }
-    
-    // DFS returns minimum time for this orange to rot
-    private int dfs(int[][] grid, int i, int j, boolean[][] visited){
-        int rows = grid.length, cols = grid[0].length;
-        if(i < 0 || j < 0 || i >= rows || j >= cols) return Integer.MAX_VALUE;
-        if(grid[i][j] == 0) return Integer.MAX_VALUE; // empty
-        if(grid[i][j] == 2) return 0; // already rotten
-        
-        if(visited[i][j]) return Integer.MAX_VALUE;
-        visited[i][j] = true;
-        
-        int[] r = {-1, 1, 0, 0};
-        int[] c = {0, 0, -1, 1};
-        int minTime = Integer.MAX_VALUE;
-        
-        for(int k = 0; k < 4; k++){
-            int ni = i + r[k], nj = j + c[k];
-            int t = dfs(grid, ni, nj, visited);
-            if(t != Integer.MAX_VALUE)
-                minTime = Math.min(minTime, t + 1); // add 1 minute for this step
+    class Pair{
+        int r;
+        int c;
+        int time;
+        public Pair(int r,int c,int time){
+            this.r=r;
+            this.c=c;
+            this.time=time;
         }
-        
-        visited[i][j] = false;
-        return minTime;
     }
+     
 }
