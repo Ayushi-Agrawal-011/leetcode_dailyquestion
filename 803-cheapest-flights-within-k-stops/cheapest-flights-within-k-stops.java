@@ -1,83 +1,52 @@
 class Solution {
+    HashMap<Integer,HashMap<Integer,Integer>> map;
     public int findCheapestPrice(int n, int[][] times, int src, int dst, int k) {
-       HashMap<Integer,HashMap<Integer,Integer>> map=new HashMap<>();
-	for(int i=0;i<n;i++) {
-					if(!map.containsKey(i))
-			map.put(i,new HashMap<>());
-         
-	}  
-    for(int i=0;i<times.length;i++) {
-					
-			int a=times[i][0];
+     map=new HashMap<>();
+        for(int i=0;i<n;i++){
+            map.put(i,new HashMap<>());
+        }
+        for(int i=0;i<times.length;i++){
+            int a=times[i][0];
             int b=times[i][1];
-            int cost=times[i][2];
-            map.get(a).put(b,cost);
-         
-	} 
-    int[][]dist=new int[n][k+2];
-    for(int[]ar:dist){
-        Arrays.fill(ar,Integer.MAX_VALUE);
-    }
-   int ans=Integer.MAX_VALUE;
-  Queue<DijkstraPair> q=new LinkedList<>();
-	
-	q.add(new  DijkstraPair(src,0,-1));
-        dist[src][0]=0;
-     
-		while(!q.isEmpty()) {
-			//1-remove
-			 DijkstraPair rp=q.poll();
+            int w=times[i][2];
+            map.get(a).put(b,w);
+        }
+           PriorityQueue<Pair> pq=new PriorityQueue<>((a,b)->(a.cost-b.cost));
+        pq.add(new Pair(src,0,0));
+        int[][]dist=new int[k+2][n];
+          for (int[] row : dist) Arrays.fill(row, Integer.MAX_VALUE);
+        dist[0][src] = 0;
+        int ans=Integer.MAX_VALUE;
+       
+        while(!pq.isEmpty()){
+            Pair rp=pq.poll();
+  if(rp.vtx==dst){
+          return rp.cost;
+          }
+            if(rp.stops>k)
+            continue;
           
-          if(rp.cost>=ans)
-          continue;
-			 //2-ignore if visited
-		
-            if(rp.stops>k){
-                continue;
-            } 
-            	      if(rp.vtx==dst){
-                        ans=Math.min(ans,rp.cost);
-                        continue;
-                      }
-                      if(rp.stops==k)
-                      continue;
-      
             
-			 //3-marked visited
+            for(int nbrs:map.get(rp.vtx).keySet()){
+int nc=map.get(rp.vtx).get(nbrs)+rp.cost;
+if( nc < dist[rp.stops+1][nbrs]){
+        dist[rp.stops+1][nbrs] = nc;
+        pq.add(new Pair(nbrs,nc,rp.stops+1));
+    }
+            }
+        }
 
-			 //4-self work
-	
-			 //5-add nbrs
-     for(int nbrs:map.get(rp.vtx).keySet()) {
-    	
-    		 int cost=map.get(rp.vtx).get(nbrs);
-             int newcost=cost+rp.cost;
-             int newstops=rp.stops+1;
-             if(newstops+1>=k+2)
-             continue;
-    		 if(newcost<dist[nbrs][newstops+1]){
-                 dist[nbrs][newstops+1]=newcost;
-                q.add(new DijkstraPair(nbrs,newcost,newstops));
-             }
-    		 
-    	 
-    	 
-     }}
- if(ans==Integer.MAX_VALUE)
-  return -1;
-  return ans;
+return -1;
 
     }
-    class DijkstraPair{
-  int vtx;
-int stops;
-  int cost;
-  public  DijkstraPair(int vtx,int cost,int stops) {
-	  this.vtx=vtx;
-	this.cost=cost;
-	this.stops=stops;
-  }
-  
-  
+    class Pair{
+        int vtx;
+        int cost;
+        int stops;
+        public Pair(int vtx,int cost,int stops){
+            this.vtx=vtx;
+            this.cost=cost;
+            this.stops=stops;
+        }
     }
 }
