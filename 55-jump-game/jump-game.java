@@ -1,14 +1,21 @@
 class Solution {
     public boolean canJump(int[] nums) {
-      int n=nums.length;
-      int maxReach=0;
-      for(int i=0;i<n;i++){
-        if(i>maxReach){
-            return false;
-        }
-        maxReach=Math.max(maxReach,i+nums[i]);
-       
-      }  
-      return true;
+         Boolean[] dp = new Boolean[nums.length];
+      return fn(nums,0,dp);
+        
+    }
+    public boolean fn(int[]nums,int i,Boolean[]dp){
+
+if(i>=nums.length)
+return false;
+if(i==nums.length-1)
+return true;
+if (dp[i] != null) return dp[i];
+ for (int jump = 1; jump <= nums[i]; jump++) {
+        if (fn(nums, i + jump,dp)) 
+        return dp[i] = true;
+    }
+     return dp[i] = false;
+
     }
 }
