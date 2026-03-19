@@ -1,16 +1,24 @@
 class Solution {
-    public boolean wordBreak(String s, List<String> wordDict) {
-        Set<String> wordSet = new HashSet<>(wordDict);
- int n=s.length();
- boolean[] dp=new boolean[n+1];
- dp[0]=true;
- for(int i=1;i<=n;i++){
-    for(int j=0;j<i;j++){
-        if(dp[j] && wordSet.contains(s.substring(j,i))){
-        dp[i]=true;
-        break;
+    public boolean wordBreak(String s, List<String> ll) {
+       Boolean[] dp=new Boolean[s.length()];
+      return fn(s,ll,0,dp);
+    }
+    public boolean fn(String s,List<String> ll,int si,Boolean[]dp){
+           if(s.length()==si)
+        return true;
+       if(dp[si]!=null)
+       return dp[si];
+       for(int i=si+1;i<=s.length();i++){
+        String p=s.substring(si,i);
+        if(ll.contains(p)){
+            boolean ans=fn(s,ll,i,dp);
+            if(ans)
+            return dp[si]=true;
+
+
         }
+       } 
+       return dp[si]=false;
     }
-    }
-    return dp[n];}
+
 }
