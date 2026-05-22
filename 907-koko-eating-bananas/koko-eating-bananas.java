@@ -1,32 +1,30 @@
 class Solution {
-    public int minEatingSpeed(int[] candies, int k) {
-        
-    int max=candies[0];
-        for(int i=1;i<candies.length;i++){
-            max=Math.max(candies[i],max);
-        }
-        int low=1,high=max;
+    public int minEatingSpeed(int[] piles, int h) {
+        int lo=1;
+        int high=Arrays.stream(piles).max().getAsInt();
         int ans=high;
-        while(low<=high){
-            int mid=low+(high-low)/2;
-            if(valid(mid,candies,k)){
+        while(lo<=high){
+            int mid=lo+(high-lo)/2;
+            if(isitpossible(piles,mid,h)){
                 ans=mid;
-                 high=mid-1;
-              
+                high=mid-1;
             }
-            else{
-                 low=mid+1;
-            }
+            else
+            lo=mid+1;
         }
         return ans;
     }
-    public boolean valid(int mid,int []candies,long k){
-        long c=0;
-        for(int i=0;i<candies.length;i++){
-           
-            c+=candies[i]/mid;
-            if(candies[i]%mid!=0)
-            c++;
-        }
-        return c<=k;
-}}
+    public boolean isitpossible(int[]piles,int k,long h){
+    long hours=0;
+    for(int i=0;i<piles.length;i++){
+        int atehour=piles[i]/k;
+        int rem=piles[i]%k;
+        hours+=atehour;
+        if(rem!=0)
+        hours++;
+    }
+    return hours<=h;
+
+
+    }
+}
