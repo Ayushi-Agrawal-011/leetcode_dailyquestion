@@ -10,26 +10,22 @@ class Solution {
                 ans=Math.max(ans,h*r);
                 else{
                     int l=st.peek();
-                      ans=Math.max(ans,h*(r-l-1));
-    
-
+                ans=Math.max(ans,h*(r-l-1));
                 }
             }
             st.push(i);
         }
         int r=arr.length;
         while(!st.isEmpty()){
-              int h=arr[st.pop()];
-               
+                int h=arr[st.pop()];
+            
                 if(st.isEmpty())
                 ans=Math.max(ans,h*r);
                 else{
                     int l=st.peek();
-                      ans=Math.max(ans,h*(r-l-1));
-    
-
+                ans=Math.max(ans,h*(r-l-1));
                 }
-        }
-        return ans;
+            }
+            return ans;
     }
 }
