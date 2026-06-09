@@ -1,27 +1,26 @@
 class Solution {
-    public String smallestNumber(String str) {
-       int[]ans=new int[str.length()+1];
-       Stack<Integer> st=new Stack<>();
-       int c=1;
-       for(int i=0;i<=str.length();i++){
-        if(i==str.length() || str.charAt(i)=='I'){
-            ans[i]=c;
-            c++;
-            while(!st.isEmpty()){
-                ans[st.pop()]=c;
+    public String smallestNumber(String s) {
+        Stack<Integer> st=new Stack<>();
+        int n=s.length();
+        int[]ans=new int[n+1];
+        int c=1;
+        for(int i=0;i<s.length()+1;i++){
+           if(i==s.length() ||s.charAt(i)=='I'){
+                ans[i]=c;
                 c++;
+                while(!st.isEmpty()){
+                    ans[st.pop()]=c;
+                    c++;
+                }
+               
             }
+          else
+           st.push(i);
         }
-        else
-        st.push(i);
-  
-       }
-       String s="";
-       for(int i=0;i<ans.length;i++){
-       
-        s+=ans[i];
-       }
-       return s;
+        String t="";
+		for(int v:ans) {
+			t+=v;
+		}
+		return t;
     }
-    
 }
