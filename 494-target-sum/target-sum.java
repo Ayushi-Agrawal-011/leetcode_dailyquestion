@@ -1,15 +1,19 @@
 class Solution {
     public int findTargetSumWays(int[] nums, int target) {
-
-        return  p(nums,0,target,0);
+        return fn(nums,target,0);
     }
-    public int p(int[]nums,int i,int target,int curr){
+    public static int fn(int[]nums,int target,int i){
+       if(i==nums.length){
+if(target==0)
+ return 1;
+ return 0;
+       }
+
+      
      
-         if(i>=nums.length)
-         return curr == target ? 1 : 0;
-        int ls=p(nums,i+1,target,curr+nums[i]);
-   int rs=p(nums,i+1,target,curr-nums[i]);    
-   return ls+rs;   
+        int a=fn(nums,target-nums[i],i+1);
+        int b=fn(nums,target+nums[i],i+1);
+        return a+b;
 
     }
 }
