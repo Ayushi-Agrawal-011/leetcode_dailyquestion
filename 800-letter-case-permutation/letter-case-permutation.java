@@ -1,26 +1,27 @@
 class Solution {
     public List<String> letterCasePermutation(String s) {
-        List<String> ll=new ArrayList<>();
-        Print(s,"",ll);
-        return ll;
+     List<String> ans=new ArrayList<>();
+     fn(s,ans,"",0);
+return ans;
     }
-    public static void Print(String ques,String ans,List<String> ll) {
-if(ques.length()==0){
-    ll.add(ans);
-    return;
-}
-char ch=ques.charAt(0);
-if(ch>=48 && ch<=57)
-Print(ques.substring(1),ans+ch,ll);
-else if(ch>=65 && ch<=90){
-    Print(ques.substring(1),ans+ch,ll);
-Print(ques.substring(1),ans+(char)(ch+32),ll);
-}
-else {
-    Print(ques.substring(1),ans+ch,ll);
-Print(ques.substring(1),ans+(char)(ch -32),ll);
-}
+    public void fn(String s,List<String> ll,String ans,int i){
+        if(s.length()==i){
+            ll.add(ans);
+            return;
         }
-	
+        
+            char ch=s.charAt(i);
+            if(ch>=65 && ch<=90){
+            fn(s,ll,ans+ch,i+1);
+             fn(s,ll,ans+(char)(ch+32),i+1);
+            }
+            else   if(ch>=97 && ch<=122){
+            fn(s,ll,ans+ch,i+1);
+             fn(s,ll,ans+(char)(ch-32),i+1);
+            }
+            else
+            fn(s,ll,ans+ch,i+1);
+        
+    }
 
 }
