@@ -15,21 +15,20 @@
  */
 class Solution {
     public boolean isBalanced(TreeNode root) {
-       return fn(root).isbal; 
+       return fn(root).isbal;
     }
-    public DiaPair fn(TreeNode root){
-        if(root==null)
-        return new DiaPair();
-        DiaPair ldp=fn(root.left);
-        DiaPair rdp=fn(root.right);
-        DiaPair sdp=new DiaPair();
-        sdp.ht=Math.max(ldp.ht,rdp.ht)+1;
-        boolean sb=Math.abs(ldp.ht-rdp.ht)<=1;
-        sdp.isbal=ldp.isbal && rdp.isbal && sb;
-        return sdp;
+    public Pair fn(TreeNode root) {
+       if(root==null)
+       return new Pair();
+       Pair ldp=fn(root.left);
+       Pair rdp=fn(root.right);
+       Pair sdp=new Pair();
+       sdp.ht=Math.max(ldp.ht,rdp.ht)+1;
+       sdp.isbal=ldp.isbal && rdp.isbal && Math.abs(ldp.ht-rdp.ht)<=1;
+       return sdp;
     }
-    class DiaPair{
-        int ht=-1;
+    class Pair{
         boolean isbal=true;
+        int ht=-1;
     }
 }
