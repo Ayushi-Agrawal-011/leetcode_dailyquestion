@@ -15,7 +15,7 @@
  */
 class Solution {
     public boolean isSymmetric(TreeNode root) {
-   return fn(root.left,root.right);
+        return fn(root.left,root.right);
     }
     public boolean fn(TreeNode root1,TreeNode root2){
         if(root1==null && root2==null)
@@ -24,10 +24,8 @@ class Solution {
         return false;
         if(root1.val!=root2.val)
         return false;
-
         boolean left=fn(root1.left,root2.right);
         boolean right=fn(root1.right,root2.left);
         return left && right;
     }
-  
 }
