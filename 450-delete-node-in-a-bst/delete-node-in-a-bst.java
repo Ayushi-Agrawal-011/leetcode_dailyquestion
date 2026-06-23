@@ -19,25 +19,26 @@ class Solution {
         return null;
         if(root.val<key)
         root.right=deleteNode(root.right,key);
-       else if(root.val>key){
-root.left=deleteNode(root.left,key);
-        }
+        else if(root.val>key)
+        root.left=deleteNode(root.left,key);
         else{
-            if(root.left==null)
+            	                if(root.left==null)
 	                return root.right;
 	                else if(root.right==null)
 	                return root.left;
                     else{
-            int min=min(root.right);
-            root.right=deleteNode(root.right,min);
-            root.val=min;
+            int mini=mini(root.right);
+             root.right= deleteNode(root.right,mini);
+             root.val=mini;
                     }
         }
         return root;
-      }
-      public int min (TreeNode root){
-        if(root==null)
-        return Integer.MAX_VALUE;
-        return Math.min(root.val,min(root.left));
-      }
+    }
+    public int mini(TreeNode root){
+        if(root==null){
+	            return Integer.MAX_VALUE;
+	        }
+	        int l=mini(root.left);
+	        return Math.min(l,root.val);
+    }
 }
