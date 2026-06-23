@@ -19,13 +19,13 @@ class Solution {
         return null;
         if(root.left==null && root.right==null)
         return root;
-        TreeNode left=flatten(root.left);
-        TreeNode right=flatten(root.right);
-        if(left!=null){
-            left.right=root.right;
-            root.right=root.left;
-            root.left=null;
+        TreeNode left_tail=flatten(root.left);
+        TreeNode right_tail=flatten(root.right);
+        if(root.left!=null){
+           left_tail.right=root.right;
+           root.right=root.left;
+           root.left=null;
         }
-        return right==null?left:right;
+        return right_tail!=null?right_tail:left_tail;
     }
 }
