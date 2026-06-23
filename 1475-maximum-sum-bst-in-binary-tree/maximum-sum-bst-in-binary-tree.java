@@ -16,29 +16,29 @@
 class Solution {
     public int maxSumBST(TreeNode root) {
         
-      return fn(root).ans;
+        return fn(root).ans;
     }
-    public BstPair fn(TreeNode root){
+    public Pair fn(TreeNode root){
         if(root==null)
-        return new BstPair();
-        BstPair ldp=fn(root.left);
-        BstPair rdp=fn(root.right);
-        BstPair sdp=new BstPair();
-       sdp.min=Math.min(ldp.min,Math.min(rdp.min,root.val));
-       sdp.max=Math.max(ldp.max,Math.max(rdp.max,root.val));
-       sdp.isbst=ldp.isbst && rdp.isbst && ldp.max<root.val && root.val<rdp.min;
-       sdp.sum=ldp.sum+rdp.sum+root.val;
-       if(sdp.isbst)
-       sdp.ans=Math.max(ldp.ans,Math.max(rdp.ans,sdp.sum));
-       else
-       sdp.ans=Math.max(ldp.ans,rdp.ans);
-       return sdp;
+        return new Pair();
+        Pair ldp=fn(root.left);
+        Pair rdp=fn(root.right);
+Pair sdp=new Pair();
+sdp.max=Math.max(root.val,Math.max(ldp.max,rdp.max));
+sdp.min=Math.min(root.val,Math.min(ldp.min,rdp.min));
+sdp.isbst=ldp.isbst && rdp.isbst && ldp.max<root.val && root.val<rdp.min;
+sdp.sum=ldp.sum+rdp.sum+root.val;
+if(sdp.isbst)
+sdp.ans=Math.max(ldp.ans,Math.max(rdp.ans,sdp.sum));
+else
+sdp.ans=Math.max(ldp.ans,rdp.ans);
+return sdp;
     }
-    class BstPair{
-    long min=Long.MAX_VALUE;
-    long max=Long.MIN_VALUE;
-    int sum=0;
-    int ans=0;
-      boolean isbst=true;
+    class Pair{
+        boolean isbst=true;
+        long max=Long.MIN_VALUE;
+        long min=Long.MAX_VALUE;
+        int sum=0;
+        int ans=0;
     }
 }
