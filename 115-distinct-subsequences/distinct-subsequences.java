@@ -8,19 +8,15 @@ class Solution {
     }
        public int fn(String s,String t,int i,int j,int[][]dp){
          if(j==t.length())
-        return 1;
-        if( i>=s.length() )
-        return 0;
-       
-      
-        if(dp[i][j]!=-1)
-        return dp[i][j];
-        int inc=0,exc=0;
-        if(s.charAt(i)==t.charAt(j)){
-inc=fn(s,t,i+1,j+1,dp);
-        }
-        
-       exc=fn(s,t,i+1,j,dp);
-        return dp[i][j]=inc+exc;
+         return 1;
+         if(i==s.length())
+         return 0;
+         if(dp[i][j]!=-1)
+         return dp[i][j];
+         int inc=0,exc=0;
+         if(s.charAt(i)==t.charAt(j))
+         inc=fn(s,t,i+1,j+1,dp);
+         exc=fn(s,t,i+1,j,dp);
+         return dp[i][j]=inc+exc;
         }
 }
