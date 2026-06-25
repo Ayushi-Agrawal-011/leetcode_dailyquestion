@@ -2,7 +2,7 @@ class Solution {
     public int rob(int[] nums) {
         int[]dp=new int[nums.length];
         Arrays.fill(dp,-1);
-     return fn(nums,0,dp) ;  
+        return fn(nums,0,dp);
     }
     public int fn(int[]nums,int i,int[]dp){
         if(i>=nums.length)
@@ -13,4 +13,5 @@ class Solution {
         int b=fn(nums,i+1,dp);
         return dp[i]=Math.max(a,b);
     }
+
 }
