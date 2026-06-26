@@ -19,10 +19,11 @@ if(dp[i][j]!=0)
 return dp[i][j];
 int ans=Integer.MIN_VALUE;
 for(int k=i+1;k<j;k++){
-    int p=fn(a,i,k,dp);
-    int q=fn(a,k,j,dp);
+    int left=fn(a,i,k,dp);
+    int right=fn(a,k,j,dp);
     int self=a[i]*a[j]*a[k];
-    ans=Math.max(ans,p+q+self);
+ans=Math.max(ans,left+right+self);
+
 }
 return dp[i][j]=ans;
     }
