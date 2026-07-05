@@ -4,7 +4,7 @@ class Solution {
         boolean[] discard=new boolean[arr.length];
         HashMap<Integer,Integer> map=new HashMap<>();
         while(ei<arr.length){
-            while(si<=ei-w){
+            while(si<ei-w+1){
 if(!discard[si]){
      map.put(arr[si],map.getOrDefault(arr[si],0)-1);    
             if(map.get(arr[si])==0)
