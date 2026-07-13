@@ -15,7 +15,7 @@ class Solution {
 		}
 		while (!q.isEmpty()) {
 			int r = q.poll();
-			visited.add(r);//jo quueu mein agye vo cyvle ka part nhi honge toh unhe yaad krlenge aur baaki pr kaam krenge
+			visited.add(r);//jo quueu 0mein agye vo cyvle ka part nhi honge toh unhe yaad krlenge aur baaki pr kaam krenge
             if(edges[r]!=-1){
 			in[edges[r]]--;
 			if(in[edges[r]]==0)
