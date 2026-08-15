@@ -11,9 +11,9 @@ class Solution {
             return;
         }
         char ch=s.charAt(0);
-        String gets=key[ch-'0'];
-        for(int i=0;i<gets.length();i++){
-            fn(s.substring(1),ll,ans+gets.charAt(i));
+        String getstring=key[ch-'0'];
+        for(int i=0;i<getstring.length();i++){
+            fn(s.substring(1),ll,ans+getstring.charAt(i));
         }
     }
 }
