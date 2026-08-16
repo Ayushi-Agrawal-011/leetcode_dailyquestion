@@ -15,20 +15,19 @@
  */
 class Solution {
     public boolean hasPathSum(TreeNode root, int targetSum) {
-      if(root==null)
-      return false;  
-      return fn(root,targetSum);
+        return fn(root,targetSum,0);
     }
-    public boolean fn(TreeNode root,int target){
+    public boolean fn(TreeNode root,int target,int curr){
         if(root==null)
-        return false;
-        if (root.left==null && root.right==null && target-root.val==0)
-        return true;
-
-        boolean left=fn(root.left,target-root.val);
-        boolean right=fn(root.right,target-root.val);
-        return left|| right;
-
+        return false ;
+        if(root.left ==null && root.right==null){
+            curr+=root.val;
+            if(curr==target){
+                return true;
+            }
+        }
+        boolean left=fn(root.left,target,curr+root.val);
+        boolean right=fn(root.right,target,curr+root.val);
+        return left ||  right;
     }
-
 }
