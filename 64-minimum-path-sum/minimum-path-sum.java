@@ -7,15 +7,15 @@ for(int[]ar:dp)
 
     }
     public int fn(int[][]grid,int i,int j,int[][]dp){
-            if (i >= grid.length || j >= grid[0].length)
+        if(i==grid.length-1 && j==grid[0].length-1)
+        return grid[i][j];
+            if(i==grid.length || j==grid[0].length )
             return Integer.MAX_VALUE;
-
-        if (i == grid.length - 1 && j == grid[0].length - 1)
-            return grid[i][j];
-        if(dp[i][j]!=-1)
-        return dp[i][j];
-        int right=fn(grid,i,j+1,dp);
-        int down=fn(grid,i+1,j,dp);
-        return dp[i][j]=Math.min(right,down)+grid[i][j];
+            if(dp[i][j]!=-1)
+            return dp[i][j];
+            int a=fn(grid,i,j+1,dp);
+            int b=fn(grid,i+1,j,dp);
+            return dp[i][j]= Math.min(a,b)+grid[i][j];
+        
     }
 }
