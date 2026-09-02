@@ -7,15 +7,14 @@ class Solution {
         return fn(word1,word2,0,0,dp);
     }
     public int fn(String s,String t,int i,int j,int[][]dp){
-          if(i>=s.length())
-        return t.length()-j;
-        if(j==t.length())
+        if(t.length()==j)
         return s.length()-i;
-      
+        if(s.length()==i)
+        return t.length()-j;
         if(dp[i][j]!=-1)
         return dp[i][j];
         if(s.charAt(i)==t.charAt(j)){
-            return dp[i][j]=fn(s,t,i+1,j+1,dp);
+            return fn(s,t,i+1,j+1,dp);
         }
         else{
             int I=fn(s,t,i+1,j,dp);
@@ -23,5 +22,6 @@ class Solution {
             int R=fn(s,t,i+1,j+1,dp);
             return dp[i][j]=Math.min(I,Math.min(D,R))+1;
         }
+        
     }
 }
