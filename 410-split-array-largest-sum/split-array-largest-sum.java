@@ -24,9 +24,8 @@ class Solution {
             i++;
         }
         else{
-            employee++;
-            assign=nums[i];
-            i++;
+           employee++;
+assign = 0;
         }
         if(employee>k)
         return false;
