@@ -1,25 +1,15 @@
 class Solution {
-    
-    public int[] dailyTemperatures(int[] temperatures) {
-     int []k=   NGE(temperatures);
-       return k; 
+    public int[] dailyTemperatures(int[] arr) {
+        int n=arr.length;
+        int[]ans=new int[n];
+        Stack<Integer> st=new Stack<>();
+        for(int i=0;i<arr.length;i++){
+          while(!st.isEmpty() &&  arr[i]>arr[st.peek()]){
+            int j=st.pop();
+            ans[j]=i-j;
+          }
+          st.push(i);
+        }
+        return ans;
     }
-    public static int[] NGE(int []nums) {
-		int[]ans=new int[nums.length];
-		Stack<Integer> st=new Stack<>();
-		for(int i=0;i<nums.length;i++){
-		    while(!st.isEmpty()&& nums[i]>nums[st.peek()]){
-		        int q=st.pop();
-                ans[q]=i-q;
-		    }
-		    st.push(i);
-		}
-		while(!st.isEmpty()){
-		    ans[st.pop()]=0;
-		}
-
-		return ans;
-
 }
-
-	}
