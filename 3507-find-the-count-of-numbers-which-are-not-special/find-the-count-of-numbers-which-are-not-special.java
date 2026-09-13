@@ -4,12 +4,12 @@ class Solution {
         boolean[]ans=new boolean[lim+1];
         ans[0]=false;
         ans[1]=false;
-        for(int i=2;i<=lim;i++){
-            ans[i]=true;
+         for(int i=2;i<=lim;i++){
+            ans[i] = true;
         }
         for(int i=2;i*i<=lim;i++){
-            for(int j=i*i;j<=lim;j+=i){
-                ans[j]=false;
+            for(int j=2;i*j<=lim;j++){
+                ans[i*j]=false;
             }
         }
         int c=0;
