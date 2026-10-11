@@ -1,28 +1,25 @@
 class Solution {
-    public int[] nextGreaterElements(int[] nums) {
-        
-        int []left=new int[nums.length];
-     for(int i=0;i<nums.length;i++){
-        int d=Integer.MAX_VALUE;
-        for(int j=i+1;j<nums.length;j++){
-          if(j!=i && nums[j]>nums[i])  
-            {d=Math.min(d,nums[j]);
-            //System.out.println(nums[j]);
-            break;}
-        }
-      if(d==Integer.MAX_VALUE)  
-        for(int j=0;j<i;j++){
-          if(j!=i && nums[j]>nums[i])  
-            {d=Math.min(d,nums[j]);
-            //System.out.println(nums[j]);
-            break;}
-        }
-        if(d!=Integer.MAX_VALUE)
-        left[i]=d;
-        else 
-        left[i]=-1;
+    public int[] nextGreaterElements(int[] arr) {
+        Stack<Integer> st=new Stack<>();
+        int[]ans=new int[arr.length];
+        for(int i=0;i<arr.length;i++){
+            while(!st.isEmpty() && arr[i]>arr[st.peek()]){
+                ans[st.pop()]=arr[i];
 
-     } 
-     return left;  
+            }
+            st.push(i);
+        }
+for (int i = 0; i < arr.length; i++) {
+            while (!st.isEmpty() && arr[i] > arr[st.peek()]) {
+                ans[st.pop()] = arr[i];
+            }
+        }
+        while(!st.isEmpty()){
+            ans[st.pop()]=-1;
+        }
+
+        return ans;
+
+
     }
 }
