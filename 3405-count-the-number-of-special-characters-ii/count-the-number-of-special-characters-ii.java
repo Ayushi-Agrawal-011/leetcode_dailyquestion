@@ -8,7 +8,7 @@ class Solution {
      }   
      int ans=set.size();
      for(char ch:set){
-    int i=  word.indexOf((char)(ch-32));
+    int i=  word.indexOf(ch-32);
 
         int j=word.lastIndexOf(ch);
         if(i==-1 || j>i){
